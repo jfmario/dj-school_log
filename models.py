@@ -15,7 +15,7 @@ class Entry ( models.Model ):
         ordering = ['date']
 
     def __str__ ( self ):
-        return self.date.strftime ( '%Y/%m/%d' ) + ' -> ' + self.student.name + ' (' + self.hours + ' hrs. )'
+        return self.date.strftime ( '%Y/%m/%d' ) + ' -> ' + self.student.name + ' (' + str ( self.hours ) + ' hrs. )'
 
 class Student ( models.Model ):
 
