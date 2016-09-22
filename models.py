@@ -21,7 +21,7 @@ class Student ( models.Model ):
     GRADE_CHOICES = [ 'Pre', 'K' ] + [str(i)for i in range(1,13)] + ['Other']
 
     age = models.PositiveIntegerField ( default=0 )
-    grade = models.CharField ( choices=GRADE_CHOICES, default='1' max_length=8 )
+    grade = models.CharField ( choices=GRADE_CHOICES, default='1', max_length=8 )
     name = models.CharField ( max_length=64 )
     user = models.ForeignKey ( user )
 
