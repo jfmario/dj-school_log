@@ -8,8 +8,8 @@ class Entry ( models.Model ):
     date = models.DateField ( default=date.today )
     description = models.TextField ( blank=True, null=True )
     hours = models.FloatField ( default=1 )
-    student = models.ForeignKey ( Student )
-    subjects = models.ManyToManyField ( Subject, blank=True, null=True, through="SubjectToEntry" )
+    student = models.ForeignKey ( 'Student' )
+    subjects = models.ManyToManyField ( 'Subject', blank=True, null=True, through="SubjectToEntry" )
 
     class Meta:
         ordering = ['date']
@@ -24,7 +24,7 @@ class Student ( models.Model ):
     age = models.PositiveIntegerField ( default=0 )
     grade = models.CharField ( choices=GRADE_CHOICES, default='1', max_length=8 )
     name = models.CharField ( max_length=64 )
-    user = models.ForeignKey ( user )
+    user = models.ForeignKey ( User )
 
     class Meta:
         ordering = ['-age','name']
@@ -35,7 +35,7 @@ class Student ( models.Model ):
 class Subject ( models.Model ):
 
     name = models.CharField ( max_length=128 )
-    user = models.ForeignKey ( user )
+    user = models.ForeignKey ( User )
 
     class Meta:
         ordering = ['name']
