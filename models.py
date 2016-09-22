@@ -19,7 +19,7 @@ class Entry ( models.Model ):
 
 class Student ( models.Model ):
 
-    GRADE_CHOICES = [ 'Pre', 'K' ] + [str(i)for i in range(1,13)] + ['Other']
+    GRADE_CHOICES = [ ('Pre','Pre'), ('K','k') ] + [(str(i),str(i))for i in range(1,13)] + [('Other','Other')]
 
     age = models.PositiveIntegerField ( default=0 )
     grade = models.CharField ( choices=GRADE_CHOICES, default='1', max_length=8 )
