@@ -15,6 +15,6 @@ class EntryAdmin ( admin.ModelAdmin ):
         obj.author = request.user
         obj.save ()
 
-admin.site.register ( Entry, Entry Admin )
+admin.site.register ( Entry, EntryAdmin )
 admin.site.register ( Student )
 admin.site.register ( Subject )
