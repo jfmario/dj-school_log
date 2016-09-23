@@ -37,7 +37,7 @@ def new_student ( request ):
         form = StudentForm ( request, user=request.user )
 
     data = {
-        'active': 'students'
+        'active': 'students',
         'form': form
     }
     return render ( request, 'school-log/forms/new-student.html', data )
