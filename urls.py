@@ -1,6 +1,6 @@
 
 from django.conf.urls import url
-from school_log.views import students, new_student, edit_student
+from school_log.views import students, new_student, edit_student, delete_student
 
 URLS = [
     url ( r'^$', students ),
