@@ -44,7 +44,31 @@ def new_student ( request ):
     }
     return render ( request, 'school-log/forms/new-student.html', data )
 
-## edit_student (n)
+@login_required
+def edit_student ( request, pk ):
+
+    student_id = int ( pk )
+    student = Student.objects.get ( id=student_id, user=request.user )
+
+    if request.method == 'POST':
+        form = StudentForm ( data=request.POST, instance=student )
+        if form.is_valid ():
+
+            student = form.save ( commit=False )
+            student.user = request.user
+            student.save ()
+
+            return HttpResponseRedirect ( '/school-log/students' )
+
+    else:
+        form = StudentForm ( instance=student )
+
+    data = {
+        'active': 'students',
+        'form': form
+    }
+    return render ( request, 'school-log/forms/edit-student.html', data )
+
 ## delete_students
 ## confirm_delete_student (n)
 
