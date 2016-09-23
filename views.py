@@ -20,6 +20,7 @@ def students ( request ):
     students = Student.objects.filter ( user=request.user )
     data = { 'students': students }
 
+    data ['active'] = 'students'
     return render ( request, 'school-log/students.html', data )
 
 @login_required
@@ -36,6 +37,7 @@ def new_student ( request ):
         form = StudentForm ( request, user=request.user )
 
     data = {
+        'active': 'students'
         'form': form
     }
     return render ( request, 'school-log/forms/new-student.html', data )

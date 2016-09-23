@@ -1,0 +1,17 @@
+{% extends 'school-log/base.html' %}
+{% block school_log_body %}
+
+    <h1>New Student</h1>
+
+    <form>
+
+        {{ form.as_p }}
+
+        <p>
+
+            <input class="btn btn-success" type="submit" value="Create" />
+
+            <a class="btn btn-warning" href="/school-log/students">Cancel</a>
+        </p>
+    </form>
+{% endblock %}
