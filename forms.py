@@ -12,6 +12,7 @@ class EntryForm ( ModelForm ):
 
     class Meta:
         model = Entry
+        fields = [ 'date', 'description', 'hours', 'student', 'subjects' ]
 
 class StudentForm ( ModelForm ):
     class Meta:
