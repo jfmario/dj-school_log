@@ -20,7 +20,7 @@ def students ( request ):
     students = Student.objects.filter ( user=request.user )
     data = { 'students': students }
 
-    data ['active'] = 'students'
+    data ['active_page'] = 'students'
     return render ( request, 'school-log/students.html', data )
 
 @login_required
@@ -39,7 +39,7 @@ def new_student ( request ):
         form = StudentForm ()
 
     data = {
-        'active': 'students',
+        'active_page': 'students',
         'form': form
     }
     return render ( request, 'school-log/forms/new-student.html', data )
@@ -64,8 +64,9 @@ def edit_student ( request, pk ):
         form = StudentForm ( instance=student )
 
     data = {
-        'active': 'students',
-        'form': form
+        'active_page': 'students',
+        'form': form,
+        'student': student
     }
     return render ( request, 'school-log/forms/edit-student.html', data )
 
