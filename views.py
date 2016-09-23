@@ -81,7 +81,7 @@ def delete_student ( request, pk ):
     }
     return render ( request, 'school-log/forms/delete-student.html', data )
 
-def confirm_delete_student ( request, pk ):
+def confirm_student_delete ( request, pk ):
 
     student_id = int ( pk )
     student = Student.objects.get ( id=student_id, user=request.user )

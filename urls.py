@@ -1,11 +1,12 @@
 
 from django.conf.urls import url
-from school_log.views import students, new_student, edit_student, delete_student
+from school_log.views import students, new_student, edit_student, delete_student, confirm_student_delete
 
 URLS = [
     url ( r'^$', students ),
     url ( r'students/', students ),
     url ( r'new-student/', new_student ),
     url ( r'edit-student/(?P<pk>[0-9]+)/$', edit_student ),
-    url ( r'delete-student/(?P<pk>[0-9]+)/$', delete_student )
+    url ( r'delete-student/(?P<pk>[0-9]+)/$', delete_student ),
+    url ( r'confirm-student-delete/(?P<pk>[0-9]+)/$', confirm_student_delete )
 ]
