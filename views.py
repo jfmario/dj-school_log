@@ -70,7 +70,16 @@ def edit_student ( request, pk ):
     }
     return render ( request, 'school-log/forms/edit-student.html', data )
 
-## delete_students
+def delete_student ( request, pk ):
+
+    student = int ( pk )
+    data = {
+        'active_page': students,
+        'student': student
+    }
+
+    return render ( request, 'school-log/forms/delete-student.html', data )
+
 ## confirm_delete_student (n)
 
 # def subjects (list and optional add 1 at a time)
