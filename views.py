@@ -72,14 +72,22 @@ def edit_student ( request, pk ):
 
 def delete_student ( request, pk ):
 
-    student = int ( pk )
+    student_id = int ( pk )
+    student = Student.objects.get ( id=student_id, user=request.user )
+
     data = {
         'active_page': students,
         'student': student
     }
-
     return render ( request, 'school-log/forms/delete-student.html', data )
 
-## confirm_delete_student (n)
+def confirm_delete_student ( request, pk ):
+
+    student_id = int ( pk )
+    student = Student.objects.get ( id=student_id, user=request.user )
+
+    student.delete ()
+
+    return HttpResponseRedirect ( '/school-log/students' )
 
 # def subjects (list and optional add 1 at a time)
