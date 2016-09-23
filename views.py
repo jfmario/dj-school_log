@@ -7,7 +7,7 @@ from school_log.models import Student
 
 ## def entries (6 mos)
 ## def entry-query (custom view from POST)
-## def new-entry
+## def new-entry(requires save_m2m())
 ## def edit_entry (n)
 ## def delete_entry
 ## def confirm_delete_entry (n)
@@ -27,14 +27,16 @@ def students ( request ):
 def new_student ( request ):
 
     if request.method == 'POST':
-        form = StudentForm ( request, user=request.user )
+        form = StudentForm ( request )
         if form.is_valid ():
 
-            form.save ()
+            student = form.save ( commit=False )
+            student.user = request.user
+            student.save ()
 
             return HttpResponseRedirect ( '/school-log/students' )
     else:
-        form = StudentForm ( request, user=request.user )
+        form = StudentForm ( request )
 
     data = {
         'active': 'students',
