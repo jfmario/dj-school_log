@@ -18,9 +18,12 @@ from school_log.models import Student
 def students ( request ):
 
     students = Student.objects.filter ( user=request.user )
-    data = { 'students': students }
+    data = { 
+        'active_page': 'students',
+        'students': students,
+        'user': request.user
+    }
 
-    data ['active_page'] = 'students'
     return render ( request, 'school-log/students.html', data )
 
 @login_required
@@ -40,7 +43,8 @@ def new_student ( request ):
 
     data = {
         'active_page': 'students',
-        'form': form
+        'form': form,
+        'user': request.user
     }
     return render ( request, 'school-log/forms/new-student.html', data )
 
@@ -66,7 +70,8 @@ def edit_student ( request, pk ):
     data = {
         'active_page': 'students',
         'form': form,
-        'student': student
+        'student': student,
+        'user': request.user
     }
     return render ( request, 'school-log/forms/edit-student.html', data )
 
@@ -77,7 +82,8 @@ def delete_student ( request, pk ):
 
     data = {
         'active_page': students,
-        'student': student
+        'student': student,
+        'user': request.user
     }
     return render ( request, 'school-log/forms/delete-student.html', data )
 
