@@ -17,7 +17,7 @@ class EntryForm ( ModelForm ):
 class StudentForm ( ModelForm ):
     class Meta:
         model = Student
-        fields = [ 'age', 'grade', 'name' ]
+        fields = [ 'name', 'age', 'grade' ]
 
 class SubjectForm ( ModelForm ):
     class Meta:
