@@ -16,9 +16,12 @@
         </ul>
         
         {5 if user %}
-        <p class="text-info pull-xs-right">
-            Logged in as <b>{{ user.username }}</b>.
-        </p>
+        <form class="form-inline pull-xs-right">
+            
+            <label class="text-info">Logged in as <b>{{ user.username }}</b>.</label>
+            
+            <a class="btn btn-outline-warning" href="/accounts/logout/">Log Out</a>
+        </form>
     </nav>
 
     <br />
