@@ -27,7 +27,7 @@ def students ( request ):
 def new_student ( request ):
 
     if request.method == 'POST':
-        form = StudentForm ( request )
+        form = StudentForm ( data=request.POST )
         if form.is_valid ():
 
             student = form.save ( commit=False )
@@ -36,7 +36,7 @@ def new_student ( request ):
 
             return HttpResponseRedirect ( '/school-log/students' )
     else:
-        form = StudentForm ( request )
+        form = StudentForm ()
 
     data = {
         'active': 'students',
