@@ -1,0 +1,22 @@
+{% extends 'site_bs4_base.html' %}
+{% block body %}
+
+    <nav class="bg-inverse navbar navbar-dark navar-fixed-top">
+
+        <a class="navbar-brand" href="/school-log/">School Log</a>
+
+        <ul class="nav navbar-nav">
+            {% if active_page and active_page == 'students' %}
+                <li class="nav-item active">
+            {% else %}
+                <li class="nav-item">
+            {% endif %}
+            <a class="nav-link" href="/school-log/students/">Students</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        {% block school_log_body %}{% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'school-log/base.html' %}
+{% block school_log_body %}
+
+    <h1>My Students</h1>
+
+    {% if students %}
+        <p>Click on a student to edit their details.</p>
+    {% else %}
+        <div class="alert alert-warning">
+            You have no students. Add one.
+        </div>
+    {% endif %}
+
+    <div class="list-group">
+
+        {% if students %}
+            {% for student in students %}
+                <a class="list-group-item list-group-item-action"
+                    href="/school-log/edit-student/{{ student.id }}/">
+
+                    <h5 class="list-group-item-heading">{{ student.name }}</h5>
+
+                    <p>
+                        Age: {{ student.age }}<br />
+                        Grade: {{ student.grade }}
+                    </p>
+                </a>
+            {% endfor %}
+        {% endif %}
+
+        <a class="list-group-item list-group-item-action"
+            href="/school-log/new-student/">
+            <h5 class="list-group-item-heading">New Student</h5>
+        </a>
+    </div>
+{% endblock %}
