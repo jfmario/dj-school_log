@@ -98,6 +98,29 @@ def edit_entry ( request, pk ):
     }
     return render ( request, 'school-log/entries/edit.html', data )
 
+@login_required
+def delete_entry ( request, pk ):
+
+    entry_id = int ( pk )
+    entry = Entry.objects.get ( id=entry_id, student__user=request.user )
+
+    data = {
+        'active_page': 'entries',
+        'entry': entry,
+        'user': request.user
+    }
+    return render ( request, 'school-log/entries/delete.html', data )
+
+@login_required
+def confirm_entry_delete ( request, pk ):
+
+    entry_id = int ( pk )
+    entry = Entry.objects.get ( id=entry_id, student__user=request.user )
+
+    entry.delete ()
+
+    return HttpResponseRedirect ( '/school-log/entries' )
+
 # Student Views
 
 @login_required
