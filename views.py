@@ -41,7 +41,7 @@ def new_entry ( request ):
                 student = Student.objects.get ( id=int ( student_id ), user=request.user )
                 entry.student = student
 
-                entry.save_m2m ()
+                entry.save ()
 
             return HttpResponseRedirect ( '/school-log/entries' )
     else:
