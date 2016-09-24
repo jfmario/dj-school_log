@@ -45,7 +45,7 @@ def new_entry ( request ):
 
             return HttpResponseRedirect ( '/school-log/entries' )
     else:
-        form = EntryForm ()
+        form = EntryForm ( user=request.user )
 
     data = {
         'active_page': 'entries',
