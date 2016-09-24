@@ -17,7 +17,7 @@ from school_log.models import Entry, Student, Subject
 @login_required
 def entries ( request ):
 
-    entries = Entry.objects.filter ( user=request.user )
+    entries = Entry.objects.filter ( student__user__=request.user )
     entries = Paginator ( entries, 50 ).page ( 1 ).object_list
     data = {
         'active_page': 'entries',
