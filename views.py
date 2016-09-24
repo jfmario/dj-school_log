@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from school_log.forms import StudentForm, SubjectForm
-from school_log.models import Student, Subject
+from school_log.models import Entry, Student, Subject
 
 ## def entries (6 mos)
 ## def entry-query (custom view from POST)
@@ -11,6 +11,21 @@ from school_log.models import Student, Subject
 ## def edit_entry (n)
 ## def delete_entry
 ## def confirm_delete_entry (n)
+
+# Entry Views
+
+@login_required
+def entries ( request ):
+
+    entries = Entry.objects.filter ( user=request.user )
+    entries = Paginator ( entries, 50 ).page ( 1 ).object_list
+    data = {
+        'active_page': 'entries',
+        'entries': entries,
+        'user': request.user
+    }
+
+    return render ( request, 'school-log/entries/list.html', data )
 
 # Student Views
 

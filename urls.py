@@ -6,6 +6,9 @@ URLS = [
 
     url ( r'^$', students ),
 
+    # entry views
+    url ( r'entries/', entries ),
+
     # student views
     url ( r'students/', students ),
     url ( r'new-student/', new_student ),

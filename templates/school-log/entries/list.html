@@ -1,0 +1,54 @@
+{% extends 'school-log/base.html' %}
+{% block school_log_body %}
+
+    <h1>My Entries</h1>
+
+    {% if not entries %}
+        <p>You have no entries.</p>
+    {% else %}
+        <p>Currently showing up to 50 most recent entries. For a more specialized
+        view, run a query.</p>
+    {% endif %}
+
+    <p>
+
+        {% if entries %}
+
+            <a class="btn btn-primary" href="/school-log/query-entries">QUERY</a>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;
+        {% endif %}
+
+        <a class="btn btn-success" href="/school-log/new-entry/">CREATE NEW</a>
+    </p>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-inverse">
+                <thead>
+                    <th>Date</th>
+                    <th>Student</th>
+                    <th>Subjects</th>
+                    <th>Hours</th>
+                    <th>Description</th>
+                    <th>Options</th>
+                </thead>
+                <tbody>
+                    {% for entry in entries %}
+                        <tr>
+                            <td>{{ entry.date }}</td>
+                            <td>{{ entry.student.name }}</td>
+                            <td>{{ entry.subjects }}</td>
+                            <td>{{ entry.hours }}</td>
+                            <td>{{ entry.description }}</td>
+                            <td>
+                                <a class="text-info" href="/school-log/edit-entry/{{ entry.id }}/">Edit</a>
+                                <a class="text-warning" href="/school-log/delete-entry/{{ entry.id }}/">Delete</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endlbock %}

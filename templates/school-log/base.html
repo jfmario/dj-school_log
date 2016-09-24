@@ -22,6 +22,14 @@
             {% endif %}
             <a class="nav-link" href="/school-log/subjects/">Subjects</a>
             </li>
+
+            {% if active_page and active_page == 'entries' %}
+                <li class="nav-item active">
+            {% else %}
+                <li class="nav-item">
+            {% endif %}
+            <a class="nav-link" href="/school-log/entries/">Entries</a>
+            </li>
         </ul>
 
         {% if user.is_authenticated %}
