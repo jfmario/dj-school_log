@@ -12,7 +12,7 @@ class Entry ( models.Model ):
     subjects = models.ManyToManyField ( 'Subject', blank=True, null=True, through="SubjectToEntry" )
 
     class Meta:
-        ordering = ['-date']
+        ordering = ['-date','-id']
 
     def get_subject_list ( self ):
         return ', '.join ( [s.name for s in self.subjects.all()] )

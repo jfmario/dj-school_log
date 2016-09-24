@@ -44,7 +44,7 @@ def new_entry ( request ):
                 new_entry.student = student
                 new_entry.save ()
 
-                for subject in request.POST.get ( 'subject' ):
+                for subject in request.POST.get ( 'subjects' ):
                     new_entry.subjects.add ( Subject.objects.get ( id=int(subject) ) )
 
                 new_entry.save ()
