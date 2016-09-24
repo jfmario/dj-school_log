@@ -14,6 +14,9 @@ class Entry ( models.Model ):
     class Meta:
         ordering = ['date']
 
+    def get_subject_list ( self ):
+        return ', '.join ( [s.name for s in self.subjects.all()] )
+
     def __str__ ( self ):
         return self.date.strftime ( '%Y/%m/%d' ) + ' -> ' + self.student.name + ' (' + str ( self.hours ) + ' hrs.)'
 
