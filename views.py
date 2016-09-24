@@ -35,7 +35,7 @@ def new_entry ( request ):
     if request.method == 'POST':
         form = EntryForm ( data=request.POST )
         print ( '[SCHOOL-LOG] views.new_entry: request.POST =>', request.POST )
-        for student_id request.POST.getlist ( 'students' ):
+        for student_id in request.POST.getlist ( 'students' ):
 
             print ( '[SCHOOL-LOG] views.new_entry: for(student_id)', student_id )
 
