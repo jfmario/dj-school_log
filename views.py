@@ -34,26 +34,25 @@ def new_entry ( request ):
     if request.method == 'POST':
         form = EntryForm ( data=request.POST )
         print ( '[SCHOOL-LOG] views.new_entry: request.POST =>', request.POST )
-        if form.is_valid ():
-            for student_id in request.POST.get ( 'students' ):
+        for student_id in request.POST.get ( 'students' ):
 
-                new_entry = Entry ( date=request.POST.get ( 'date' ),
-                    description=request.POST.get ( 'description' ),
-                    hours=request.POST.get ( 'hours' ) )
-                student = Student.objects.get ( id=int ( student_id ), user=request.user )
+            new_entry = Entry ( date=request.POST.get ( 'date' ),
+                description=request.POST.get ( 'description' ),
+                hours=request.POST.get ( 'hours' ) )
+            student = Student.objects.get ( id=int ( student_id ), user=request.user )
 
-                new_entry.student = student
-                new_entry.save ()
+            new_entry.student = student
+            new_entry.save ()
 
-                for subject in request.POST.get ( 'subjects' ):
-                    se = SubjectToEntry ( subject=Subject.objects.get ( id=int(subject) ),
-                        entry=new_entry )
-                    se.save ()
-                    se = None
+            for subject in request.POST.get ( 'subjects' ):
+                se = SubjectToEntry ( subject=Subject.objects.get ( id=int(subject) ),
+                    entry=new_entry )
+                se.save ()
+                se = None
 
-                new_entry = None
+            new_entry = None
 
-            return HttpResponseRedirect ( '/school-log/entries' )
+        return HttpResponseRedirect ( '/school-log/entries' )
     else:
         form = EntryForm ()
 
