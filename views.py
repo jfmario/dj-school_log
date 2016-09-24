@@ -48,8 +48,9 @@ def new_entry ( request ):
                     se = SubjectToEntry ( subject=Subject.objects.get ( id=int(subject) ),
                         entry=new_entry )
                     se.save ()
+                    se = None
 
-                new_entry.save ()
+                new_entry = None
 
             return HttpResponseRedirect ( '/school-log/entries' )
     else:
