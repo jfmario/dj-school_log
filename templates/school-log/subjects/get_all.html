@@ -1,0 +1,28 @@
+{% extends 'school-log/base.html' %}
+{% block school_log_body %}
+
+    <h1>My Subjects</h1>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        {% for subject in subjects %}
+            <div class="form-group row">
+                <div class="col-sm-10"><b>{{ subject.name }}</b></div>
+                <div class="col-sm-2">
+                    <a class="btn btn-sm btn-warning" href="/school-log/delete-subject/{{ subject.id }}">
+                        Delete
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+        
+        <div class="form-group row">
+            <div class="col-sm-10">{{ form.name }}</div>
+            <div class="col-sm-2">
+                <input class="btn btn-sm btn-primary" type="submit">Add</input>
+            </div>
+        </div>
+    </form>
+{% endblock %}
