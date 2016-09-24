@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from school_log.forms import EntryForm, StudentForm, SubjectForm
-from school_log.models import Entry, Student, Subject
+from school_log.models import Entry, Student, Subject, SubjectToEntry
 
 ## def entries (6 mos)
 ## def entry-query (custom view from POST)
@@ -45,7 +45,9 @@ def new_entry ( request ):
                 new_entry.save ()
 
                 for subject in request.POST.get ( 'subjects' ):
-                    new_entry.subjects.add ( Subject.objects.get ( id=int(subject) ) )
+                    se = SubjectToEntry ( subject=Subject.objects.get ( id=int(subject) ),
+                        entry=new_entry )
+                    se.save ()
 
                 new_entry.save ()
 
