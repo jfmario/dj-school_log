@@ -75,7 +75,7 @@ def new_entry ( request ):
 def edit_entry ( request, pk ):
 
     entry_id = int ( pk )
-    entry = Entry.objects.get ( id=entry_id, user=request.user )
+    entry = Entry.objects.get ( id=entry_id, student__user=request.user )
 
     if request.method == 'POST':
         form = EntryFormComplete ( data=request.POST, instance=entry )
