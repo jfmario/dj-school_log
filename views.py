@@ -37,6 +37,7 @@ def new_entry ( request ):
             for student_id in request.POST.get ( 'students' ):
 
                 entry = EntryForm ( data=request.POST ).save ( commit=False )
+                entry.pk = None
 
                 student = Student.objects.get ( id=int ( student_id ), user=request.user )
                 entry.student = student
