@@ -85,7 +85,10 @@ def edit_entry ( request, pk ):
             entry.user = request.user
             entry.save ()
 
-            form.save_m2m ()
+            for subject_id in request.POST.getlist ( 'subjects' ):
+                se = SubjectToEntry ( subject=Subject.objects.get ( id=int(subject) ),
+                    entry=new_entry )
+                se.save ()
 
             return HttpResponseRedirect ( '/school-log/entries' )
 
