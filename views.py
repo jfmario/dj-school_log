@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from school_log.forms import StudentForm, SubjectForm
+from school_log.forms import EntryForm, StudentForm, SubjectForm
 from school_log.models import Entry, Student, Subject
 
 ## def entries (6 mos)
@@ -27,6 +27,32 @@ def entries ( request ):
     }
 
     return render ( request, 'school-log/entries/list.html', data )
+
+@login_required
+def new_entry ( request ):
+
+    if request.method == 'POST':
+        form = EntryForm ( data=request.POST )
+        if form.is_valid ():
+            for student_id in request.POST.get ( 'students' ):
+
+                entry = EntryForm ( data=request.POST ).save ( commit=False )
+
+                student = Student.objects.get ( id=int ( student_id ), user=request.user )
+                entry.student = student
+
+                entry.save_m2m ()
+
+            return HttpResponseRedirect ( '/school-log/entries' )
+    else:
+        form = StudentForm ()
+
+    data = {
+        'active_page': 'entries',
+        'form': form,
+        'user': request.user
+    }
+    return render ( request, 'school-log/entries/new-entry.html', data )
 
 # Student Views
 

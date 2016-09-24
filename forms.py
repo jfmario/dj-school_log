@@ -7,12 +7,12 @@ class EntryForm ( ModelForm ):
 
     def __init__ ( self, user, *args, **kwargs ):
         super ( EntryForm, self ).__init__ ( *args, **kwargs )
-        self.fields ['student'] = Student.objects.filter ( user=user )
+        # self.fields ['student'] = Student.objects.filter ( user=user )
         self.fields ['subjects'] = Subject.objects.filter ( user=user )
 
     class Meta:
         model = Entry
-        fields = [ 'date', 'description', 'hours', 'student', 'subjects' ]
+        fields = [ 'date', 'description', 'hours', 'subjects' ]
 
 class StudentForm ( ModelForm ):
     class Meta:
