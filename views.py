@@ -33,6 +33,7 @@ def new_entry ( request ):
 
     if request.method == 'POST':
         form = EntryForm ( data=request.POST )
+        print ( '[SCHOOL-LOG] views.new_entry: request.POST =>', request.POST )
         if form.is_valid ():
             for student_id in request.POST.get ( 'students' ):
 
