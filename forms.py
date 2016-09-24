@@ -1,6 +1,6 @@
 
 from django.db import models
-from django.forms import ModelForm
+from django.forms import ModelForm, widgets
 from school_log.models import Entry, Student, Subject
 
 class EntryForm ( ModelForm ):
@@ -13,6 +13,12 @@ class EntryForm ( ModelForm ):
     class Meta:
         model = Entry
         fields = [ 'date', 'description', 'hours', 'subjects' ]
+        widgets = {
+            'date': widgets.DateInput ( attrs= { 'class': 'form-control' } ),
+            'description': widgets.Textarea ( attrs= { 'class': 'form-control' } ),
+            'hours': widgets.NumberInput ( attrs= { 'class': 'form-control' } ),
+            'subjects': widgets.Select ( attrs= { 'class': 'form-control' } ),
+        }
 
 class EntryFormComplete ( ModelForm ):
     class Meta:
