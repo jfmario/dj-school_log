@@ -44,7 +44,7 @@ def new_entry ( request ):
                 new_entry.student = student
                 new_entry.save ()
 
-                for subject in entry.subjects.all ()
+                for subject in entry.subjects.all ():
                     new_entry.subjects.add ( subject )
 
                 new_entry.save ()
