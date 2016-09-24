@@ -20,7 +20,7 @@
         <div class="form-group row">
             <div class="col-sm-2">Students:</div>
             <div class="col-sm-10">
-                <select multiple="multiple" name="students">
+                <select class="form-control" multiple="multiple" name="students">
                     {% for student in students %}
                         <option value="{{ student.id }}">{{ student.name }}</option>
                     {% endfor %}
