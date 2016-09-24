@@ -5,34 +5,52 @@ from school_log.models import Entry, Student, Subject
 
 class EntryForm ( ModelForm ):
 
-    class Meta:
-        model = Entry
-        fields = [ 'date', 'description', 'hours', 'subjects' ]
-        widgets = {
-            'date': widgets.DateInput ( attrs= { 'class': 'form-control' } ),
-            'description': widgets.Textarea ( attrs= { 'class': 'form-control' } ),
-            'hours': widgets.NumberInput ( attrs= { 'class': 'form-control' } ),
-            'subjects': widgets.Select ( attrs= { 'class': 'form-control' } ),
-        }
-
-class EntryFormComplete ( ModelForm ):
-    class Meta:
-        model = Entry
-        fields = [ 'date', 'description', 'hours', 'student', 'subjects' ]
-
-class StudentForm ( ModelForm ):
-    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
                 'class': 'form-control'
         })
+
+    class Meta:
+        model = Entry
+        fields = [ 'date', 'description', 'hours', 'subjects' ]
+
+class EntryFormComplete ( ModelForm ):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control'
+        })
+
+    class Meta:
+        model = Entry
+        fields = [ 'date', 'description', 'hours', 'student', 'subjects' ]
+
+class StudentForm ( ModelForm ):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control'
+        })
+
     class Meta:
         model = Student
         fields = [ 'name', 'age', 'grade' ]
 
 class SubjectForm ( ModelForm ):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in iter(self.fields):
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control'
+        })
+
     class Meta:
         model = Subject
         fields = ['name']
