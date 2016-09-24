@@ -8,6 +8,7 @@ URLS = [
 
     # entry views
     url ( r'entries/', entries ),
+    url ( r'new-entry/', new_entry ),
 
     # student views
     url ( r'students/', students ),
