@@ -86,7 +86,7 @@ def edit_entry ( request, pk ):
             entry.save ()
 
             for subject_id in request.POST.getlist ( 'subjects' ):
-                se = SubjectToEntry ( subject=Subject.objects.get ( id=int(subject) ),
+                se = SubjectToEntry ( subject=Subject.objects.get ( id=int(subject_id) ),
                     entry=new_entry )
                 se.save ()
 
