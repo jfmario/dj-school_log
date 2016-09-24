@@ -47,11 +47,14 @@ def new_entry ( request ):
     else:
         form = EntryForm ()
 
+    students = Student.object.filter ( user=request.user )
     data = {
         'active_page': 'entries',
         'form': form,
+        'students': students,
         'user': request.user
     }
+
     return render ( request, 'school-log/entries/new-entry.html', data )
 
 # Student Views
