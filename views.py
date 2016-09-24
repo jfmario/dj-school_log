@@ -36,9 +36,9 @@ def new_entry ( request ):
         if form.is_valid ():
             for student_id in request.POST.get ( 'students' ):
 
-                new_entry = Entry ( date=request.POST.date,
-                    description=request.POST.description,
-                    hours=request.POST.hours )
+                new_entry = Entry ( date=request.POST.get ( 'date' ),
+                    description=request.POST.get ( 'description' ),
+                    hours=request.POST.get ( 'hours' ) )
                 student = Student.objects.get ( id=int ( student_id ), user=request.user )
 
                 new_entry.student = student
