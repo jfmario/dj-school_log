@@ -24,7 +24,7 @@
             </li>
         </ul>
 
-        {% if user.username %}
+        {% if user.username != '' %}
             <form class="form-inline pull-xs-right">
 
                 <label class="text-info">Logged in as <b>{{ user.username }}</b></label>
