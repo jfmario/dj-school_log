@@ -85,6 +85,8 @@ def edit_entry ( request, pk ):
             entry.user = request.user
             entry.save ()
 
+            form.save_m2m ()
+
             return HttpResponseRedirect ( '/school-log/entries' )
 
     else:
