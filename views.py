@@ -124,7 +124,7 @@ def subjects ( request ):
     return render ( request, 'school-log/subjects/get_all.html', data )
 
 @login_required
-def delete_subject ( request, pk )
+def delete_subject ( request, pk ):
 
     subject_id = int ( pk )
     subject = Subject.objects.get ( id=subject_id, user=request.user )
