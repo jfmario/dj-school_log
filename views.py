@@ -36,13 +36,17 @@ def new_entry ( request ):
         print ( '[SCHOOL-LOG] views.new_entry: request.POST =>', request.POST )
         for student_id in request.POST.get ( 'students' ):
 
+            print ( '[SCHOOL-LOG] views.new_entry: for(student_id)', student_id )
+
             new_entry = Entry ( date=request.POST.get ( 'date' ),
                 description=request.POST.get ( 'description' ),
                 hours=request.POST.get ( 'hours' ) )
             student = Student.objects.get ( id=int ( student_id ), user=request.user )
 
             new_entry.student = student
+            print ( '[SCHOOL-LOG] views.new_entry: for(student_id) new_entry =>', new_entry )
             new_entry.save ()
+            print ( '[SCHOOL-LOG] views.new_entry: for(student_id) new_entry =>', new_entry )
 
             for subject in request.POST.get ( 'subjects' ):
                 se = SubjectToEntry ( subject=Subject.objects.get ( id=int(subject) ),
