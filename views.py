@@ -33,18 +33,21 @@ def new_entry ( request ):
 
     if request.method == 'POST':
         form = EntryForm ( data=request.POST )
+        entry = form.save ( commit=False )
         if form.is_valid ():
             for student_id in request.POST.get ( 'students' ):
 
-                entry = EntryForm ( data=request.POST ).save ( commit=False )
-                # entry = entry.copy ()
-                entry.id = None
-                entry.pk = None
-
+                new_entry = Entry ( date=entry.date,
+                    description=entry.description, hours=entry.hours )
                 student = Student.objects.get ( id=int ( student_id ), user=request.user )
-                entry.student = student
 
-                entry.save ()
+                new_entry.student = student
+                new_entry.save ()
+
+                for subject in entry.subjects.all ()
+                    new_entry.subjects.add ( subject )
+
+                new_entry.save ()
 
             return HttpResponseRedirect ( '/school-log/entries' )
     else:
