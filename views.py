@@ -47,7 +47,7 @@ def new_entry ( request ):
     else:
         form = EntryForm ()
 
-    students = Student.object.filter ( user=request.user )
+    students = Student.objects.filter ( user=request.user )
     data = {
         'active_page': 'entries',
         'form': form,
