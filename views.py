@@ -35,8 +35,9 @@ def new_entry ( request ):
     if request.method == 'POST':
         form = EntryForm ( data=request.POST )
         print ( '[SCHOOL-LOG] views.new_entry: request.POST =>', request.POST )
-        for student_id in request.POST.get ( 'students' ):
+        for i in range ( 0, len ( request.POST.get ( 'students' ) ) ):
 
+            student_id = request.POST.get ( 'students' ) [i]
             print ( '[SCHOOL-LOG] views.new_entry: for(student_id)', student_id )
 
             new_entry = Entry ( date=datetime.datetime.strptime ( request.POST.get ( 'date' ), '%Y-%m-%d' ),
@@ -45,7 +46,7 @@ def new_entry ( request ):
             student = Student.objects.get ( id=int ( student_id ), user=request.user )
 
             new_entry.student = student
-            print ( '[SCHOOL-LOG] views.new_entry: for(student_id) new_entry =>', new_entry )
+            print ( '[SCHOOL-LOG] views.new_entry: for(student_id) new_entry =>', new_entry, new_entry.id )
             new_entry.save ()
             print ( '[SCHOOL-LOG] views.new_entry: for(student_id) new_entry =>', new_entry )
 
