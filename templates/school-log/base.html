@@ -24,15 +24,16 @@
             </li>
         </ul>
 
-        {5 if user %}
-        <form class="form-inline pull-xs-right">
+        {% if user.is_authenticated %}
+            <form class="form-inline pull-xs-right">
 
-            <label class="text-info">Logged in as <b>{{ user.username }}</b></label>
+                <label class="text-info">Logged in as <b>{{ user.username }}</b></label>
 
-            &nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;
 
-            <a class="btn btn-outline-warning" href="/accounts/logout/">Log Out</a>
-        </form>
+                <a class="btn btn-outline-warning" href="/accounts/logout/">Log Out</a>
+            </form>
+        {% endif %}
     </nav>
 
     <br />
