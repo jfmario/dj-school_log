@@ -14,5 +14,7 @@ URLS = [
     url ( r'confirm-student-delete/(?P<pk>[0-9]+)/$', confirm_student_delete ),
 
     # subject views
-    url ( r'subjects/', subjects )
+    url ( r'subjects/', subjects ),
+    url ( r'delete-student/(?P<pk>[0-9]+)/$', delete_subject ),
+    url ( r'confirm-student-delete/(?P<pk>[0-9]+)/$', confirm_subject_delete )
 ]

@@ -1,0 +1,11 @@
+{% extends 'school-log/base.html' %}
+{% block school_log_body %}
+
+    <h1>Delete Subject</h1>
+
+    <p>Really delete subject: {{ subject.name }}?</p>
+    <p>
+        <a class="btn btn-danger" href="/school-log/confirm-subject-delete/{{ subject.id }}">DELETE</a>
+        <a class="btn btn-secondary" href="/school-log/subjects">Cancel</a>
+    </p>
+{% endblock %}

@@ -6,6 +6,7 @@
         <a class="navbar-brand" href="/school-log/">School Log</a>
 
         <ul class="nav navbar-nav">
+
             {% if active_page and active_page == 'students' %}
                 <li class="nav-item active">
             {% else %}
@@ -13,15 +14,23 @@
             {% endif %}
             <a class="nav-link" href="/school-log/students/">Students</a>
             </li>
+
+            {% if active_page and active_page == 'subjects' %}
+                <li class="nav-item active">
+            {% else %}
+                <li class="nav-item">
+            {% endif %}
+            <a class="nav-link" href="/school-log/subjects/">Subjects</a>
+            </li>
         </ul>
-        
+
         {5 if user %}
         <form class="form-inline pull-xs-right">
-            
+
             <label class="text-info">Logged in as <b>{{ user.username }}</b></label>
-            
+
             &nbsp;&nbsp;&nbsp;&nbsp;
-            
+
             <a class="btn btn-outline-warning" href="/accounts/logout/">Log Out</a>
         </form>
     </nav>

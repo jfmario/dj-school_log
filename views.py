@@ -82,7 +82,7 @@ def delete_student ( request, pk ):
     student = Student.objects.get ( id=student_id, user=request.user )
 
     data = {
-        'active_page': students,
+        'active_page': 'students',
         'student': student,
         'user': request.user
     }
@@ -122,3 +122,26 @@ def subjects ( request ):
     }
 
     return render ( request, 'school-log/subjects/get_all.html', data )
+
+@login_required
+def delete_subject ( request, pk )
+
+    subject_id = int ( pk )
+    subject = Subject.objects.get ( id=subject_id, user=request.user )
+
+    data = {
+        'active_page': 'subjects',
+        'subject': subject,
+        'user': request.user
+    }
+    return render ( request, 'school-log/subjects/delete.html', data )
+
+@login_required
+def confirm_subject_delete ( request, pk ):
+
+    subject_id = int ( pk )
+    subject = Subject.objects.get ( id=subject_id, user=request.user )
+
+    subject.delete ()
+
+    return HttpResponseRedirect ( '/school-log/subjects' )
