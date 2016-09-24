@@ -38,9 +38,9 @@ def new_entry ( request ):
 
             print ( '[SCHOOL-LOG] views.new_entry: for(student_id)', student_id )
 
-            new_entry = Entry ( date=request.POST.get ( 'date' ),
+            new_entry = Entry ( date=datetime.datetime.strptime ( request.POST.get ( 'date' ), '%Y-%M-%D' ),
                 description=request.POST.get ( 'description' ),
-                hours=request.POST.get ( 'hours' ) )
+                hours=float( request.POST.get ( 'hours' ) ) )
             student = Student.objects.get ( id=int ( student_id ), user=request.user )
 
             new_entry.student = student
