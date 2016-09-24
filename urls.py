@@ -9,6 +9,7 @@ URLS = [
     # entry views
     url ( r'entries/', entries ),
     url ( r'new-entry/', new_entry ),
+    url ( r'edit-entry/(?P<pk>[0-9]+)/$', edit_student ),
 
     # student views
     url ( r'students/', students ),

@@ -71,6 +71,33 @@ def new_entry ( request ):
 
     return render ( request, 'school-log/entries/new-entry.html', data )
 
+@login_required
+def edit_entry ( request, pk ):
+
+    entry_id = int ( pk )
+    entry = Student.objects.get ( id=entry_id, user=request.user )
+
+    if request.method == 'POST':
+        form = EntryFormComple ( data=request.POST, instance=entry )
+        if form.is_valid ():
+
+            entry = form.save ( commit=False )
+            entry.user = request.user
+            entry.save ()
+
+            return HttpResponseRedirect ( '/school-log/entries' )
+
+    else:
+        form = EntryFormComplete ( instance=entry )
+
+    data = {
+        'active_page': 'entries',
+        'form': form,
+        'entry': entry,
+        'user': request.user
+    }
+    return render ( request, 'school-log/entries/edit.html', data )
+
 # Student Views
 
 @login_required

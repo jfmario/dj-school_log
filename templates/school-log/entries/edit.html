@@ -1,0 +1,30 @@
+{% extends 'school-log/base.html' %}
+{% block school_log_body %}
+
+    <h1>Edit Entry</h1>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        {% for field in form %}
+
+            {{ field.errors }}
+
+            <div class="form-group row">
+                <div class="col-sm-2">{{ field.label_tag }}</div>
+                <div class="col-sm-10">{{ field }}</div>
+            </div>
+        {% endfor %}
+
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+
+                <input class="btn btn-info" type="submit" value="Save" />
+
+                <a class="btn btn-warning" href="/school-log/delete-entry/{{ entry.id }}">Delete Entry</a>
+                <a class="btn btn-secondary" href="/school-log/entries">Cancel</a>
+            </div>
+        </div>
+    </form>
+{% endblock %}
