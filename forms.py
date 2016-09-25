@@ -5,7 +5,7 @@ from school_log.models import Entry, Student, Subject
 
 class EntryForm ( ModelForm ):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
 
         super().__init__(*args, **kwargs)
 
@@ -13,7 +13,7 @@ class EntryForm ( ModelForm ):
             self.fields[field].widget.attrs.update({
                 'class': 'form-control'
         })
-        self.fields ['subjects'] = Subject.objects.filter ( user=kwargs ['user'] )
+        self.fields ['subjects'] = Subject.objects.filter ( user=user )
 
     class Meta:
         model = Entry
@@ -21,7 +21,7 @@ class EntryForm ( ModelForm ):
 
 class EntryFormComplete ( ModelForm ):
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, user, *args, **kwargs):
 
         super().__init__(*args, **kwargs)
 
@@ -29,8 +29,8 @@ class EntryFormComplete ( ModelForm ):
             self.fields[field].widget.attrs.update({
                 'class': 'form-control'
         })
-        self.fields ['subjects'] = Subject.objects.filter ( user=kwargs ['user'] )
-        self.fields ['students'] = Student.objects.filter ( user=kwargs ['user'] )
+        self.fields ['subjects'] = Subject.objects.filter ( user=user )
+        self.fields ['students'] = Student.objects.filter ( user=user )
 
     class Meta:
         model = Entry
