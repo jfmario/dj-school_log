@@ -6,7 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from school_log.forms import EntryForm, EntryFormComplete, StudentForm, SubjectForm
 from school_log.models import Entry, Student, Subject, SubjectToEntry
-from school_log.query import EntryQuery
+from school_log.queries import EntryQuery
 # Entry Views
 
 @login_required
@@ -102,7 +102,7 @@ def edit_entry ( request, pk ):
 @login_required
 def query_entries ( request ):
     pass
-    
+
 @login_required
 def delete_entry ( request, pk ):
 

@@ -6,11 +6,14 @@ from school_log.models import Entry, Student, Subject
 class EntryForm ( ModelForm ):
 
     def __init__(self, *args, **kwargs):
+
         super().__init__(*args, **kwargs)
+
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
                 'class': 'form-control'
         })
+        self.fields ['subjects'] = Subject.objects.filter ( user=kwargs ['user'] )
 
     class Meta:
         model = Entry
@@ -19,11 +22,15 @@ class EntryForm ( ModelForm ):
 class EntryFormComplete ( ModelForm ):
 
     def __init__(self, *args, **kwargs):
+
         super().__init__(*args, **kwargs)
+
         for field in iter(self.fields):
             self.fields[field].widget.attrs.update({
                 'class': 'form-control'
         })
+        self.fields ['subjects'] = Subject.objects.filter ( user=kwargs ['user'] )
+        self.fields ['students'] = Student.objects.filter ( user=kwargs ['user'] )
 
     class Meta:
         model = Entry
