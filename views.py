@@ -112,7 +112,7 @@ def query_entries ( request ):
         return render ( request, 'school-log/entries/list.html', data )
     else:
         data ['students'] = Student.objects.filter ( user=request.user )
-        data ['subjects'] = Student.objects.filter ( user=request.user )
+        data ['subjects'] = Subject.objects.filter ( user=request.user )
         return render ( request, 'school-log/entries/query.html', data )
 
 @login_required
