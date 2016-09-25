@@ -1,0 +1,97 @@
+{% extends 'school-log/base.html' %}
+{% block school_log_body %}
+
+    <h1>Query Entries</h1>
+
+    <p>Leave fields as-is to query everything.</p>
+
+    <form method="post">
+
+        {% csrf_token %}
+
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label class="form-label">Start Date</label>
+            </div>
+            <div class="col-sm-10">
+                <input class="form-control" name="begin_date" type="date" value="1970-01-01" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label class="form-label">End Date</label>
+            </div>
+            <div class="col-sm-10">
+                <input class="form-control" name="end_date" type="date" value="2100-12-31" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label class="form-label">Description Keywords</label>
+            </div>
+            <div class="col-sm-10">
+                <textarea class="form-control" name="description_keyterms" value="" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label class="form-label">Minimum Hours</label>
+            </div>
+            <div class="col-sm-10">
+                <input class="form-control" name="hours_min" type="number" value="0" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label class="form-label">Maximum Hours</label>
+            </div>
+            <div class="col-sm-10">
+                <input class="form-control" name="hours_max" type="number" value="9999" />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label class="form-label">Students</label>
+            </div>
+            <div class="col-sm-10">
+                <select class="form-control" multiple="multiple" name="students">
+                    {% for student in students %}
+                        <option value="{{ student.id}}">{{ student.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label class="form-label">Subjects</label>
+            </div>
+            <div class="col-sm-10">
+                <select class="form-control" multiple="multiple" name="subjects">
+                    {% for subject in subjects %}
+                        <option value="{{ subject.id}}">{{ subject.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-2">
+                <label class="form-label">Output</label>
+            </div>
+            <div class="col-sm-10">
+                <select class="form-control" name="format" value="HTML">
+                    <option value="HTML">HTML</option>
+                    <option value="CSV">CSV (Not Working Yet)</option>
+                    <option value="PDF">PDF (Not Working Yet)</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">
+
+                <input class="btn btn-primary" type="submit" value="Query" />
+
+                 <a class="btn btn-secondary" href="/school-log/entries">Cancel</a>
+            </div>
+        </div>
+    </form>
+{% endblock %}

@@ -6,14 +6,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from school_log.forms import EntryForm, EntryFormComplete, StudentForm, SubjectForm
 from school_log.models import Entry, Student, Subject, SubjectToEntry
-
-## def entries (6 mos)
-## def entry-query (custom view from POST)
-## def new-entry(requires save_m2m())
-## def edit_entry (n)
-## def delete_entry
-## def confirm_delete_entry (n)
-
+from school_log.query import EntryQuery
 # Entry Views
 
 @login_required
@@ -33,7 +26,7 @@ def entries ( request ):
 def new_entry ( request ):
 
     if request.method == 'POST':
-        form = EntryForm ( data=request.POST )
+        form = EntryForm ( data=request.POST, user=user )
         print ( '[SCHOOL-LOG] views.new_entry: request.POST =>', request.POST )
         for student_id in request.POST.getlist ( 'students' ):
 
@@ -59,7 +52,7 @@ def new_entry ( request ):
 
         return HttpResponseRedirect ( '/school-log/entries' )
     else:
-        form = EntryForm ()
+        form = EntryForm ( user=user )
 
     students = Student.objects.filter ( user=request.user )
     data = {
@@ -78,7 +71,7 @@ def edit_entry ( request, pk ):
     entry = Entry.objects.get ( id=entry_id, student__user=request.user )
 
     if request.method == 'POST':
-        form = EntryFormComplete ( data=request.POST, instance=entry )
+        form = EntryFormComplete ( data=request.POST, user=user, instance=entry )
         if form.is_valid ():
 
             entry = form.save ( commit=False )
@@ -96,7 +89,7 @@ def edit_entry ( request, pk ):
             return HttpResponseRedirect ( '/school-log/entries' )
 
     else:
-        form = EntryFormComplete ( instance=entry )
+        form = EntryFormComplete ( instance=entry, user=user )
 
     data = {
         'active_page': 'entries',
@@ -106,6 +99,10 @@ def edit_entry ( request, pk ):
     }
     return render ( request, 'school-log/entries/edit.html', data )
 
+@login_required
+def query_entries ( request ):
+    pass
+    
 @login_required
 def delete_entry ( request, pk ):
 
