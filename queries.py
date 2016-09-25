@@ -36,5 +36,5 @@ class EntryQuery:
             query = query.filter ( student__id__in=self.students )
         if ( self.subjects ):
             query = query.filter ( reduce ( lambda x, y: x | y,
-                [Q(subject__id=i)for i in self.subjects] ) )
+                [Q(subjects__id=i)for i in self.subjects] ) )
         return query
