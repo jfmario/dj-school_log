@@ -12,6 +12,8 @@ from school_log.forms import EntryForm, EntryFormComplete, StudentForm, SubjectF
 from school_log.models import Entry, Student, Subject, SubjectToEntry
 from school_log.queries import EntryQuery
 
+width, height = A4
+
 def coord(x, y, unit=1):
     x, y = x * unit, height -  y * unit
     return x, y
@@ -163,10 +165,7 @@ def query_entries ( request ):
             t.setStyle ( TableStyle ([
                 ( 'BACKGROUND', (0,0), (4,0), colors.gray )
             ]))
-
-            width, height = A4
             t.wrapOn(p, width, height)
-
             t.drawOn(p, *coord(1.8, 9.6, cm))
 
             p.showPage ()
