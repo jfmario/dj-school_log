@@ -30,7 +30,7 @@ class EntryFormComplete ( ModelForm ):
                 'class': 'form-control'
         })
         self.fields ['subjects'].queryset = Subject.objects.filter ( user=user )
-        self.fields ['students'].queryset = Student.objects.filter ( user=user )
+        self.fields ['student'].queryset = Student.objects.filter ( user=user )
 
     class Meta:
         model = Entry
