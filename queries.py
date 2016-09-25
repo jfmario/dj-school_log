@@ -1,6 +1,6 @@
 
 import datetime
-from django.models import Q
+from django.db.models import Q
 from school_log.models import Entry, Student, Subject
 
 class EntryQuery:
