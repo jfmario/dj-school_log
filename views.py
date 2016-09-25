@@ -77,13 +77,11 @@ def edit_entry ( request, pk ):
             entry = form.save ( commit=False )
             entry.user = request.user
             entry.save ()
+            SubjectToEntry.objects.filter ( entry=entry ).delete ()
 
             for subject_id in request.POST.getlist ( 'subjects' ):
-
-                SubjectToEntry.objects.filter ( entry=entry ).delete ()
                 se = SubjectToEntry ( subject=Subject.objects.get ( id=int(subject_id) ),
                     entry=entry )
-
                 se.save ()
 
             return HttpResponseRedirect ( '/school-log/entries' )
