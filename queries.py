@@ -29,9 +29,9 @@ class EntryQuery:
                 [Q(description__contains=d)for d in self.description] ) )
         query = query.filter ( hours__gte=self.hours_min, hours__lte=self.hours_max )
 
-        if ( students ):
+        if ( self.students ):
             query = query.filter ( student__id__in=self.students )
-        if ( subjects ):
+        if ( self.subjects ):
             query = query.filter ( reduce ( lambda x, y: x | y,
                 [Q(subject_id=i)for i in self.subjects] ) )
         return query
