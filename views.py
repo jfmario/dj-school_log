@@ -1,6 +1,7 @@
 
 import csv, datetime
 from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4, cm
 from reportlab.pdfgen import canvas
 from reportlab.platypus import Table, TableStyle
 from django.contrib.auth.decorators import login_required
@@ -10,6 +11,11 @@ from django.shortcuts import render
 from school_log.forms import EntryForm, EntryFormComplete, StudentForm, SubjectForm
 from school_log.models import Entry, Student, Subject, SubjectToEntry
 from school_log.queries import EntryQuery
+
+def coord(x, y, unit=1):
+    x, y = x * unit, height -  y * unit
+    return x, y
+
 # Entry Views
 
 @login_required
@@ -158,7 +164,11 @@ def query_entries ( request ):
                 ( 'BACKGROUND', (0,0), (4,0), colors.gray )
             ]))
 
-            p.add ( t )
+            width, height = A4
+            t.wrapOn(p, width, height)
+
+            t.drawOn(p, *coord(1.8, 9.6, cm))
+
             p.showPage ()
             p.save ()
 
