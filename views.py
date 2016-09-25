@@ -99,7 +99,19 @@ def edit_entry ( request, pk ):
 
 @login_required
 def query_entries ( request ):
-    pass
+
+    data = {
+        'active_page': entries,
+        'user': request.user
+    }
+
+    if method == 'POST':
+
+        query_object = EntryQuery ( request )
+        data ['entries'] = query_object.execute ()
+        return render ( request, 'school-log/entries/list.html', data )
+    else:
+        return render ( request, 'school-log/entries/query.html', data )
 
 @login_required
 def delete_entry ( request, pk ):

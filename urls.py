@@ -7,11 +7,12 @@ URLS = [
     url ( r'^$', students ),
 
     # entry views
-    url ( r'entries/', entries ),
+    url ( r'^entries/', entries ),
     url ( r'new-entry/', new_entry ),
     url ( r'edit-entry/(?P<pk>[0-9]+)/$', edit_entry ),
     url ( r'delete-entry/(?P<pk>[0-9]+)/$', delete_entry ),
     url ( r'confirm-entry-delete/(?P<pk>[0-9]+)/$', confirm_entry_delete ),
+    url ( r'query_entries/', query_entries ),
 
     # student views
     url ( r'students/', students ),
