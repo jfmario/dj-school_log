@@ -1,8 +1,8 @@
 
-import datetime
+import csv, datetime
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from school_log.forms import EntryForm, EntryFormComplete, StudentForm, SubjectForm
 from school_log.models import Entry, Student, Subject, SubjectToEntry
@@ -101,15 +101,40 @@ def edit_entry ( request, pk ):
 def query_entries ( request ):
 
     data = {
-        'active_page': entries,
+        'active_page': 'entries',
         'user': request.user
     }
 
     if request.method == 'POST':
 
+        output_format = request.POST.get ( 'format' )
         query_object = EntryQuery ( request )
-        data ['entries'] = query_object.execute ()
-        return render ( request, 'school-log/entries/list.html', data )
+
+        entries = query_object.execute ()
+
+        if output_format == 'CSV':
+
+            response = HttpResponse ( content_type='text/csv' )
+            response ['Content-Disposition'] = 'attachment;filename="school-log.csv"'
+            writer = csv.writer ( response )
+
+            writer.writerow ( [ 'Date', 'Student', 'Subjects', 'Hours',
+                'Description' ] )
+
+            for entry in entries:
+                cells = [
+                    entry.get_date (),
+                    entry.student.name,
+                    entry.get_subject_list (),
+                    str ( entry.hours ),
+                    entry.description
+                ]
+                writer.writerow ( cells )
+
+            return response
+        else:
+            data ['entries'] = query_object.execute ()
+            return render ( request, 'school-log/entries/list.html', data )
     else:
         data ['students'] = Student.objects.filter ( user=request.user )
         data ['subjects'] = Subject.objects.filter ( user=request.user )
