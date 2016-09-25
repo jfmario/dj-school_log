@@ -1,5 +1,8 @@
 
 import csv, datetime
+from reportlab.lib import colors
+from reportlab.pdfgen import canvas
+from reportlab.platypus import Table, TableStyle
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect
@@ -130,6 +133,34 @@ def query_entries ( request ):
                     entry.description
                 ]
                 writer.writerow ( cells )
+
+            return response
+        elif output_format == 'PDF':
+
+            response = HttpResponse ( content_type='application/pdf' )
+            response ['Content-Disposition'] = 'attachment;filename="school-log.pdf"'
+            p = canvas.Canvas ( response )
+
+            table_data = [ [ 'Date', 'Student', 'Subjects', 'Hours',
+                'Description' ] ]
+
+            for entry in entries:
+                table_data.append ([
+                    entry.get_date (),
+                    entry.student.name,
+                    entry.get_subject_list (),
+                    str ( entry.hours ),
+                    entry.description
+                ])
+
+            t = Table ( table_data )
+            t.setStyle ( TableStyle ([
+                ( 'BACKGROUND', (0,0), (4,0), colors.gray )
+            ]))
+
+            p.add ( t )
+            p.showPage ()
+            p.save ()
 
             return response
         else:
