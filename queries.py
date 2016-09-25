@@ -1,5 +1,6 @@
 
 import datetime
+from functools import reduce
 from django.db.models import Q
 from school_log.models import Entry, Student, Subject
 
