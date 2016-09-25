@@ -23,11 +23,11 @@ class EntryQuery:
     def execute ( self ):
 
         query = Entry.objects.filter ( student__user=self.user )
-        query = query.filter ( date__gte=self.begin_date, date_lte=self.end_date )
+        query = query.filter ( date__gte=self.begin_date, date__lte=self.end_date )
         if self.description:
             query = query.filter ( reduce ( lambda x, y: x | y,
                 [Q(description__contains=d)for d in self.description] ) )
-        query = query.filter ( hours_gte=self.hours_min, hours_lte=self.hours_max )
+        query = query.filter ( hours__gte=self.hours_min, hours__lte=self.hours_max )
 
         if ( students ):
             query = query.filter ( student__id__in=self.students )
