@@ -29,7 +29,7 @@ class EntryQuery:
         query = query.filter ( date__gte=self.begin_date, date__lte=self.end_date )
         if self.description_keyterms:
             query = query.filter ( reduce ( lambda x, y: x | y,
-                [Q(description__contains=d)for d in self.description] ) )
+                [Q(description__contains=d)for d in self.description_keyterms] ) )
         query = query.filter ( hours__gte=self.hours_min, hours__lte=self.hours_max )
 
         if ( self.students ):
