@@ -105,7 +105,7 @@ def query_entries ( request ):
         'user': request.user
     }
 
-    if method == 'POST':
+    if request.method == 'POST':
 
         query_object = EntryQuery ( request )
         data ['entries'] = query_object.execute ()
