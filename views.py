@@ -111,6 +111,8 @@ def query_entries ( request ):
         data ['entries'] = query_object.execute ()
         return render ( request, 'school-log/entries/list.html', data )
     else:
+        data ['students'] = Student.objects.filter ( user=request.user )
+        data ['subjects'] = Student.objects.filter ( user=request.user )
         return render ( request, 'school-log/entries/query.html', data )
 
 @login_required
