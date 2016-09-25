@@ -13,7 +13,7 @@ class EntryForm ( ModelForm ):
             self.fields[field].widget.attrs.update({
                 'class': 'form-control'
         })
-        self.fields ['subjects'] = Subject.objects.filter ( user=user )
+        self.fields ['subjects'].queryset = Subject.objects.filter ( user=user )
 
     class Meta:
         model = Entry
@@ -29,8 +29,8 @@ class EntryFormComplete ( ModelForm ):
             self.fields[field].widget.attrs.update({
                 'class': 'form-control'
         })
-        self.fields ['subjects'] = Subject.objects.filter ( user=user )
-        self.fields ['students'] = Student.objects.filter ( user=user )
+        self.fields ['subjects'].queryset = Subject.objects.filter ( user=user )
+        self.fields ['students'].queryset = Student.objects.filter ( user=user )
 
     class Meta:
         model = Entry
