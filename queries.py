@@ -24,7 +24,7 @@ class EntryQuery:
 
         query = Entry.objects.filter ( student__user=self.user )
         query = query.filter ( date__gte=self.begin_date, date__lte=self.end_date )
-        if self.description:
+        if self.description_keyterms:
             query = query.filter ( reduce ( lambda x, y: x | y,
                 [Q(description__contains=d)for d in self.description] ) )
         query = query.filter ( hours__gte=self.hours_min, hours__lte=self.hours_max )
