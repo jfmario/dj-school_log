@@ -26,7 +26,7 @@ def entries ( request ):
 def new_entry ( request ):
 
     if request.method == 'POST':
-        form = EntryForm ( data=request.POST, user=user )
+        form = EntryForm ( data=request.POST, user=request.user )
         print ( '[SCHOOL-LOG] views.new_entry: request.POST =>', request.POST )
         for student_id in request.POST.getlist ( 'students' ):
 
@@ -52,7 +52,7 @@ def new_entry ( request ):
 
         return HttpResponseRedirect ( '/school-log/entries' )
     else:
-        form = EntryForm ( user=user )
+        form = EntryForm ( user=request.user )
 
     students = Student.objects.filter ( user=request.user )
     data = {
@@ -71,7 +71,7 @@ def edit_entry ( request, pk ):
     entry = Entry.objects.get ( id=entry_id, student__user=request.user )
 
     if request.method == 'POST':
-        form = EntryFormComplete ( data=request.POST, user=user, instance=entry )
+        form = EntryFormComplete ( data=request.POST, user=request.user, instance=entry )
         if form.is_valid ():
 
             entry = form.save ( commit=False )
@@ -89,7 +89,7 @@ def edit_entry ( request, pk ):
             return HttpResponseRedirect ( '/school-log/entries' )
 
     else:
-        form = EntryFormComplete ( instance=entry, user=user )
+        form = EntryFormComplete ( instance=entry, user=request.user )
 
     data = {
         'active_page': 'entries',
