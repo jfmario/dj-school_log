@@ -17,8 +17,10 @@ class EntryQuery:
         self.description_keyterms = post.get ( 'description_keyterms', '' ).split ()
         self.hours_min = float ( post.get ( 'hours_min', 0 ) )
         self.hours_max = float ( post.get ( 'hours_max', 9999 ) )
-        self.students = [Student.objects.get(id=int(i))for i in post.getlist('students',[])]
-        self.subjects = [Subject.objects.get(id=int(i))for i in post.getlist('subjects',[])]
+        # self.students = [Student.objects.get(id=int(i))for i in post.getlist('students',[])]
+        # self.subjects = [Subject.objects.get(id=int(i))for i in post.getlist('subjects',[])]
+        self.students = post.getlist ( 'students' )
+        self.subjects = post.getlist ( 'subjects' )
 
     def execute ( self ):
 
@@ -33,5 +35,5 @@ class EntryQuery:
             query = query.filter ( student__id__in=self.students )
         if ( self.subjects ):
             query = query.filter ( reduce ( lambda x, y: x | y,
-                [Q(subject_id=i)for i in self.subjects] ) )
+                [Q(subject__id=i)for i in self.subjects] ) )
         return query
