@@ -1,25 +1,22 @@
 
 from django.db import models
 from django.forms import ModelForm, widgets
+from shared.forms import BootstrapModelForm
 from school_log.models import Entry, Student, Subject
 
-class EntryForm ( ModelForm ):
+class EntryForm ( BootstrapModelForm ):
 
-    def __init__(self, user, *args, **kwargs):
+    def __init__ (self, user, *args, **kwargs):
 
         super().__init__(*args, **kwargs)
-
-        for field in iter(self.fields):
-            self.fields[field].widget.attrs.update({
-                'class': 'form-control'
-        })
+        
         self.fields ['subjects'].queryset = Subject.objects.filter ( user=user )
 
     class Meta:
         model = Entry
         fields = [ 'date', 'description', 'hours', 'subjects' ]
 
-class EntryFormComplete ( ModelForm ):
+class EntryFormComplete ( BootstrapModelForm ):
 
     def __init__(self, user, *args, **kwargs):
 
@@ -36,28 +33,12 @@ class EntryFormComplete ( ModelForm ):
         model = Entry
         fields = [ 'date', 'description', 'hours', 'student', 'subjects' ]
 
-class StudentForm ( ModelForm ):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in iter(self.fields):
-            self.fields[field].widget.attrs.update({
-                'class': 'form-control'
-        })
-
+class StudentForm ( BootstrapModelForm ):
     class Meta:
         model = Student
         fields = [ 'name', 'age', 'grade' ]
 
-class SubjectForm ( ModelForm ):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in iter(self.fields):
-            self.fields[field].widget.attrs.update({
-                'class': 'form-control'
-        })
-
+class SubjectForm ( BootstrapModelForm ):
     class Meta:
         model = Subject
         fields = ['name']
