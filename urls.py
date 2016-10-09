@@ -24,5 +24,8 @@ URLS = [
     # subject views
     url ( r'subjects/', subjects ),
     url ( r'delete-subject/(?P<pk>[0-9]+)/$', delete_subject ),
-    url ( r'confirm-subject-delete/(?P<pk>[0-9]+)/$', confirm_subject_delete )
+    url ( r'confirm-subject-delete/(?P<pk>[0-9]+)/$', confirm_subject_delete ),
+
+    # about page
+    url ( r'about', about )
 ]
