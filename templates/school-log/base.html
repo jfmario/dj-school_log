@@ -30,6 +30,14 @@
             {% endif %}
             <a class="nav-link" href="/school-log/entries/">Entries</a>
             </li>
+
+            {% if active_page and active_page == 'about' %}
+                <li class="nav-item active">
+            {% else %}
+                <li class="nav-item">
+            {% endif %}
+            <a class="nav-link" href="/school-log/about">About</a>
+            </li>
         </ul>
 
         {% if user.is_authenticated %}

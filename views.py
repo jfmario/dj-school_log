@@ -338,4 +338,5 @@ def confirm_subject_delete ( request, pk ):
     return HttpResponseRedirect ( '/school-log/subjects' )
 
 def about ( request ):
-    return TemplateResponse ( request, 'school-log/about.html', {} )
+    data = { 'active_page': 'about' }
+    return TemplateResponse ( request, 'school-log/about.html', data )
