@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.template.response import TemplateResponse
 from school_log.forms import EntryForm, EntryFormComplete, StudentForm, SubjectForm
 from school_log.models import Entry, Student, Subject, SubjectToEntry
 from school_log.queries import EntryQuery
@@ -336,3 +337,7 @@ def confirm_subject_delete ( request, pk ):
     subject.delete ()
 
     return HttpResponseRedirect ( '/school-log/subjects' )
+
+def about ( request ):
+    data = { 'active_page': 'about' }
+    return TemplateResponse ( request, 'school-log/about.html', data )
