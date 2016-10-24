@@ -22,10 +22,6 @@ class EntryFormComplete ( BootstrapModelForm ):
 
         super().__init__(*args, **kwargs)
 
-        for field in iter(self.fields):
-            self.fields[field].widget.attrs.update({
-                'class': 'form-control'
-        })
         self.fields ['subjects'].queryset = Subject.objects.filter ( user=user )
         self.fields ['student'].queryset = Student.objects.filter ( user=user )
 
